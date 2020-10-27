@@ -6,4 +6,5 @@
     <string name="se_connecter">Se connecter</string>
     <string name="app_bateaux">App_Bateaux</string>
     <string name="docker">Docker :</string>
+    <string name="logologin">logologin</string>
 </resources>
