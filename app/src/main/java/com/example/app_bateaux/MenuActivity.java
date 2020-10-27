@@ -3,6 +3,8 @@ package com.example.app_bateaux;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,15 @@ public class MenuActivity extends Activity {
 
         TextView textView = (TextView)findViewById(R.id.textViewUser);
         textView.setText(user);
+
+        Button bGetCont = (Button)this.findViewById(R.id.buttonGetContainers);
+        MenuActivity menuAct = this;
+        bGetCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
