@@ -2,11 +2,13 @@ package com.example.app_bateaux;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -92,6 +94,7 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
             {
                 logAct.suite = new Intent(logAct, MenuActivity.class);
                 logAct.suite.putExtra("User", rep.getChargeUtile());
+                SocketHandler.setSock(cliSock);
                 logAct.startActivity(logAct.suite);
             }
             else
