@@ -1,0 +1,4 @@
+include ':Req_Rep_IOBREP'
+include ':Req_Rep_Multithread'
+include ':app'
+rootProject.name = "App_Bateaux"

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">App_Bateaux</string>
+    <string name="login_d_un_responsable_de_dock">Login d\'un responsable de dock</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="login">Login</string>
+    <string name="se_connecter">Se connecter</string>
+</resources>
