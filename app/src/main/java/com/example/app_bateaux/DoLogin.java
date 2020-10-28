@@ -44,7 +44,7 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
         ObjectOutputStream oos=null;
         RequeteIOBREP req = new RequeteIOBREP(RequeteIOBREP.LOGIN, "");
         String ipAddress = "192.168.0.27";
-        int port = 50005;
+        int port = 50006;
         if(Connect == false)
         {
             try

@@ -8,4 +8,11 @@
     <string name="logologin">logologin</string>
     <string name="menu">Menu</string>
     <string name="chargement_des_containers">Chargement des containers</string>
+    <string name="r_sultats">Résultats</string>
+    <string name="trier_par_anciennet">Trier par ancienneté</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="poids">Poids</string>
+    <string name="date">Date</string>
+    <string name="coord">Coord</string>
+    <string name="id">Id</string>
 </resources>

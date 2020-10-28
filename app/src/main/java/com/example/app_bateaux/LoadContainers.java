@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ public class LoadContainers extends Activity {
     private Socket cliSock;
     private Spinner spinner;
     private Button btnSubmit;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +42,42 @@ public class LoadContainers extends Activity {
 
 
         btnSubmit = (Button) findViewById(R.id.buttonRecherche);
+        LoadContainers context = this;
 
+        checkBox = (CheckBox)findViewById(R.id.checkBox1);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String mode="0";
                 String chaine = String.valueOf(spinner.getSelectedItem());
-                Toast.makeText(LoadContainers.this, "Test " + chaine, Toast.LENGTH_LONG).show();
+                if(chaine.equals(""))
+                {
+                    //Toast
+                }
+                else
+                {
+                    if(checkBox.isSelected())
+                    {
+                        mode="1";
+                    }
+
+
+                }
+
+
+                ListView mListView;
+                ArrayList<Containers> ListContainers = new ArrayList<Containers>();
+                Containers c = new Containers("5,2","C001","17/05/20","15");
+                ListContainers.add(c);
+                ListContainers.add(c);
+                ListContainers.add(c);
+
+                mListView = (ListView) findViewById(R.id.ListContainers);
+
+                ContainerAdapter adapter = new ContainerAdapter(context,ListContainers);
+                mListView.setAdapter(adapter);
             }
         });
 
