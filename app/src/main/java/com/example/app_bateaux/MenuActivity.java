@@ -39,7 +39,8 @@ public class MenuActivity extends Activity {
         bGetCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                suite = new Intent(menuAct, LoadContainers.class);
+                menuAct.startActivity(suite);
             }
         });
     }
