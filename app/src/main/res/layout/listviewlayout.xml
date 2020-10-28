@@ -17,10 +17,10 @@
         android:textColorLink="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"></TextView>
+        app:layout_constraintVertical_bias="0.048"></TextView>
 
     <TextView
         android:id="@+id/Coord"
@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"></TextView>
+        app:layout_constraintVertical_bias="0.048"></TextView>
 
     <TextView
         android:id="@+id/Date"
@@ -45,19 +45,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"></TextView>
+        app:layout_constraintVertical_bias="0.048"></TextView>
 
     <TextView
         android:id="@+id/Poids"
-        android:layout_width="62dp"
-        android:layout_height="26dp"
+        android:layout_width="59dp"
+        android:layout_height="25dp"
         android:text="@string/poids"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.749"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"></TextView>
+        app:layout_constraintVertical_bias="0.048"></TextView>
 
 </android.support.constraint.ConstraintLayout>

@@ -66,6 +66,9 @@ public class ContainerAdapter extends BaseAdapter {
         Poids.setText(mListC.get(position).Poids);
 
         //On retourne l'item créé.
+
+
+
         return layoutItem;
     }
 }

@@ -169,6 +169,8 @@
         android:layout_width="339dp"
         android:layout_height="250dp"
         android:backgroundTint="#FFFF"
+        android:divider="@color/white"
+        android:dividerHeight="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
