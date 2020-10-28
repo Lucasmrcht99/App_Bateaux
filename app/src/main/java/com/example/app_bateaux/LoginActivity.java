@@ -42,9 +42,4 @@ public class LoginActivity extends Activity {
             }
         });
     }
-
-    public void AfficheToast(String msg)
-    {
-        Toast.makeText(this,msg, Toast.LENGTH_LONG).show();
-    }
 }

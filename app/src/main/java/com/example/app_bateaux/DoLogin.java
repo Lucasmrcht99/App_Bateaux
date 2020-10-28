@@ -43,8 +43,8 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
         ObjectInputStream ois=null;
         ObjectOutputStream oos=null;
         RequeteIOBREP req = new RequeteIOBREP(RequeteIOBREP.LOGIN, "");
-        String ipAddress = "192.168.0.27";
-        int port = 50006;
+        String ipAddress = "192.168.0.7";
+        int port = 50005;
         if(Connect == false)
         {
             try
@@ -54,19 +54,19 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
             }
             catch (UnknownHostException e)
             {
-                logAct.AfficheToast("Erreur ! Host non trouvé [" + e + "]");
+                AfficheToast.Affiche("Erreur ! Host non trouvé [" + e + "]", logAct);
             }
             catch (IOException e)
             {
                 System.out.println("Erreur de connexion " + ipAddress + " " + String.valueOf(port));
-                logAct.AfficheToast("Erreur de connexion " + ipAddress + " " + String.valueOf(port));
+                AfficheToast.Affiche("Erreur de connexion " + ipAddress + " " + String.valueOf(port), logAct);
                 Connect = false;
                 return null;
             }
         }
         if(cliSock.isClosed())
         {
-            logAct.AfficheToast("Erreur de connexion");
+            AfficheToast.Affiche("Erreur de connexion", logAct);
             Connect = false;
             return null;
         }
@@ -79,7 +79,7 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
         }
         catch (IOException e)
         {
-            logAct.AfficheToast("Connexion au serveur perdue\nPossiblement plus de connexions disponible");
+            AfficheToast.Affiche("Connexion au serveur perdue\nPossiblement plus de connexions disponible", logAct);
             Connect = false;
             return null;
         }
@@ -99,7 +99,7 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
             }
             else
             {
-                logAct.AfficheToast("Erreur de connexion");
+                AfficheToast.Affiche("Erreur de connexion", logAct);
                 RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
                 oos = new ObjectOutputStream(cliSock.getOutputStream());
                 oos.writeObject(req2);
@@ -109,11 +109,11 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
         }
         catch (ClassNotFoundException  e)
         {
-            logAct.AfficheToast("Erreur sur la classe = " + e.getMessage());
+            AfficheToast.Affiche("Erreur sur la classe = " + e.getMessage(), logAct);
         }
         catch (IOException e)
         {
-            logAct.AfficheToast("Connexion au serveur perdue");
+            AfficheToast.Affiche("Connexion au serveur perdue", logAct);
             Connect = false;
         }
         return null;

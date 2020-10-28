@@ -39,7 +39,8 @@ public class MenuActivity extends Activity {
         bGetCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suite = new Intent(menuAct, LoadContainers.class);
+                suite = new Intent(menuAct, LoadContainersActivity.class);
+                suite.putExtra("User", user);
                 menuAct.startActivity(suite);
             }
         });
@@ -57,11 +58,5 @@ public class MenuActivity extends Activity {
         catch (IOException e) {
             System.out.println("Connexion au serveur perdue");
         }
-    }
-
-
-    public void AfficheToast(String msg)
-    {
-        Toast.makeText(this,msg, Toast.LENGTH_LONG).show();
     }
 }
