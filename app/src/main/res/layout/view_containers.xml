@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0b7990"
-    tools:context=".LoadContainersActivity">
+    tools:context=".ViewContainersAcitivity">
 
     <TextView
-        android:id="@+id/poids2"
+        android:id="@+id/poids3"
         android:layout_width="62dp"
         android:layout_height="26dp"
         android:text="@string/poids"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.334" />
 
     <TextView
-        android:id="@+id/coord2"
+        android:id="@+id/coord3"
         android:layout_width="55dp"
         android:layout_height="26dp"
         android:text="@string/coord"
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.334" />
 
     <TextView
-        android:id="@+id/date2"
+        android:id="@+id/date3"
         android:layout_width="90dp"
         android:layout_height="26dp"
         android:text="@string/date"
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.334" />
 
     <TextView
-        android:id="@+id/id2"
+        android:id="@+id/id3"
         android:layout_width="66dp"
         android:layout_height="26dp"
         android:text="@string/id"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.334" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/r_sultats"
@@ -84,7 +84,7 @@
         app:layout_constraintVertical_bias="0.281" />
 
     <View
-        android:id="@+id/divider4"
+        android:id="@+id/divider7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFFF"
@@ -96,7 +96,7 @@
         app:layout_constraintVertical_bias="0.252" />
 
     <View
-        android:id="@+id/divider3"
+        android:id="@+id/divider8"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFFF"
@@ -108,10 +108,10 @@
         app:layout_constraintVertical_bias="0.073" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/chargement_des_containers"
+        android:text="@string/liste_des_containers"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="24sp"
@@ -124,7 +124,7 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <CheckBox
-        android:id="@+id/checkBox1"
+        android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="#FFFF"
@@ -138,7 +138,7 @@
         app:layout_constraintVertical_bias="0.11" />
 
     <Button
-        android:id="@+id/buttonRecherche"
+        android:id="@+id/buttonRecherche3"
         android:layout_width="200dp"
         android:layout_height="42dp"
         android:background="#FFFF"
@@ -152,10 +152,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.18" />
 
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:backgroundTint="#FFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.11" />
+
     <ListView
         android:id="@+id/ListContainers2"
         android:layout_width="339dp"
-        android:layout_height="250dp"
+        android:layout_height="390dp"
         android:backgroundTint="#FFFF"
         android:choiceMode="singleChoice"
         android:divider="@color/white"
@@ -164,10 +176,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.829" />
 
     <ImageButton
-        android:id="@+id/imageButtonReturn"
+        android:id="@+id/imageButtonReturn3"
         android:layout_width="46dp"
         android:layout_height="41dp"
         android:adjustViewBounds="true"
@@ -180,33 +192,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/buttonLoadContainer"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:text="@string/charger_container"
-        android:textColor="#0b7990"
-        android:theme="@style/AppTheme.Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -46,7 +46,6 @@ public class ContainerAdapter extends BaseAdapter {
         ConstraintLayout layoutItem;
         //(1) : Réutilisation des layouts
 
-
         if (convertView == null) {
             layoutItem = (ConstraintLayout) mInflater.inflate(R.layout.listviewlayout, parent, false);
         } else {
@@ -66,9 +65,6 @@ public class ContainerAdapter extends BaseAdapter {
         Poids.setText(mListC.get(position).Poids);
 
         //On retourne l'item créé.
-
-
-
         return layoutItem;
     }
 }

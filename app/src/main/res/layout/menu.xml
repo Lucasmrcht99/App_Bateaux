@@ -9,6 +9,21 @@
     tools:context=".MenuActivity">
 
     <Button
+        android:id="@+id/buttonBoat"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:background="#FFFF"
+        android:text="@string/bateau_arriv"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
+
+    <Button
         android:id="@+id/buttonGetContainers"
         android:layout_width="272dp"
         android:layout_height="42dp"
@@ -21,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.595" />
+        app:layout_constraintVertical_bias="0.769" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -44,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.181"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/textViewUser"
@@ -103,5 +119,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.073" />
+
+    <Button
+        android:id="@+id/buttonAffCont"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:background="#FFFF"
+        android:text="@string/liste_des_containers"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67" />
 
 </android.support.constraint.ConstraintLayout>

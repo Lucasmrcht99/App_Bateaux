@@ -33,13 +33,31 @@ public class MenuActivity extends Activity {
 
         TextView textView = (TextView)findViewById(R.id.textViewUser);
         textView.setText(user);
+        MenuActivity menuAct = this;
+
+        Button bBoat = (Button)this.findViewById(R.id.buttonBoat);
+        bBoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         Button bGetCont = (Button)this.findViewById(R.id.buttonGetContainers);
-        MenuActivity menuAct = this;
         bGetCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 suite = new Intent(menuAct, LoadContainersActivity.class);
+                suite.putExtra("User", user);
+                menuAct.startActivity(suite);
+            }
+        });
+
+        Button bListCont = (Button)this.findViewById(R.id.buttonAffCont);
+        bListCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suite = new Intent(menuAct, ViewContainersAcitivity.class);
                 suite.putExtra("User", user);
                 menuAct.startActivity(suite);
             }

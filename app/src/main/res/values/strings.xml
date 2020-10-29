@@ -15,4 +15,9 @@
     <string name="date">Date</string>
     <string name="coord">Coord</string>
     <string name="id">Id</string>
+    <string name="charger_container">Charger un Container</string>
+    <string name="affichage_des_containers">Affichage des Containers</string>
+    <string name="liste_des_containers">Liste des containers</string>
+    <string name="bateau_arriv">Bateau arrivé</string>
+    <string name="todo">TODO</string>
 </resources>

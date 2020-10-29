@@ -1,11 +1,10 @@
 package com.example.app_bateaux;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -17,46 +16,45 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import req_rep_IOBREP.RequeteIOBREP;
 
-public class LoadContainersActivity extends Activity {
-
+public class ViewContainersAcitivity extends AppCompatActivity {
     ObjectInputStream ois=null;
     ObjectOutputStream oos=null;
     private Socket cliSock;
     private Spinner spinner;
     private Button btnSubmit;
     private ImageButton btnReturn;
-    private Button btnLoadCont;
     private CheckBox checkBox;
     public Intent suite;
     private ListView mListView;
     private String user;
-    private String containerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.load_containers);
+        this.getSupportActionBar().hide();
+        setContentView(R.layout.view_containers);
         cliSock=SocketHandler.getSock();
         user = (String)this.getIntent().getExtras().get("User");
-        btnSubmit = (Button) findViewById(R.id.buttonRecherche);
-        LoadContainersActivity context = this;
-        checkBox = (CheckBox)findViewById(R.id.checkBox1);
+        btnSubmit = (Button) findViewById(R.id.buttonRecherche3);
+        ViewContainersAcitivity context = this;
+        checkBox = (CheckBox)findViewById(R.id.checkBox2);
         mListView = (ListView) findViewById(R.id.ListContainers2);
-        btnReturn = (ImageButton) findViewById(R.id.imageButtonReturn);
-        btnLoadCont = (Button) findViewById(R.id.buttonLoadContainer);
+        btnReturn = (ImageButton) findViewById(R.id.imageButtonReturn3);
 
-
+        DoGetDestinations doGetDest = new DoGetDestinations(this);
+        doGetDest.doInBackground();
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListView.removeAllViewsInLayout();
                 String mode="0";
-                String chaine = "Flemalle";
+                String chaine = String.valueOf(spinner.getSelectedItem());
                 if(chaine.equals(""))
                 {
                     AfficheToast.Affiche("Selectionnez une destination", context);
@@ -68,7 +66,7 @@ public class LoadContainersActivity extends Activity {
                         mode="1";
                     }
                     System.out.println(mode);
-                    DoGetContainersLoad doGetCont = new DoGetContainersLoad(chaine, mode, context);
+                    DoGetContainersView doGetCont = new DoGetContainersView(chaine, mode, context);
                     doGetCont.doInBackground();
                 }
             }
@@ -80,27 +78,6 @@ public class LoadContainersActivity extends Activity {
                 suite = new Intent(context, MenuActivity.class);
                 suite.putExtra("User", user);
                 context.startActivity(suite);
-            }
-        });
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for(int i=0; i < parent.getChildCount(); i++)
-                {
-                    parent.getChildAt(i).setBackgroundColor(Color.parseColor("#0b7990"));
-                }
-                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#00384d"));
-                Containers c = (Containers)mListView.getItemAtPosition(position);
-                containerId = c.getId();
-                System.out.println(containerId);
-            }
-        });
-
-        btnLoadCont.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
@@ -121,6 +98,21 @@ public class LoadContainersActivity extends Activity {
         mListView.setAdapter(adapter);
     }
 
+    public void addItemsOnSpinner(String str) {
+
+        spinner = (Spinner) findViewById(R.id.spinner3);
+        List<String> list = new ArrayList<String>();
+        list.add("");
+
+        StringTokenizer st = new StringTokenizer(str, "&");
+        while(st.hasMoreTokens())
+            list.add(st.nextToken());
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner.setAdapter(dataAdapter);
+    }
 
     @Override
     protected void onDestroy() {
