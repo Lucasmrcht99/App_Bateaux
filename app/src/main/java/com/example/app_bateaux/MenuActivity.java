@@ -22,6 +22,7 @@ public class MenuActivity extends Activity {
     ObjectOutputStream oos=null;
     private Socket cliSock;
     public Intent suite;
+    private  String lang="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,10 @@ public class MenuActivity extends Activity {
         setContentView(R.layout.menu);
 
         user = (String)this.getIntent().getExtras().get("User");
+        lang = (String)this.getIntent().getExtras().get("Langue");
+
+
+
         cliSock = SocketHandler.getSock();
 
         TextView textView = (TextView)findViewById(R.id.textViewUser);
@@ -62,6 +67,21 @@ public class MenuActivity extends Activity {
                 menuAct.startActivity(suite);
             }
         });
+
+        if(lang.equalsIgnoreCase("1"))
+        {
+            bBoat.setText("Boat Arrived");
+            bListCont.setText("List of containers");
+            bGetCont.setText("Loading of containers");
+        }
+        else if (lang.equalsIgnoreCase("2"))
+        {
+            TextView texttop = (TextView)findViewById(R.id.textView);
+            texttop.setText("Menü");
+            bBoat.setText("Boot angekommen");
+            bListCont.setText("Liste der Container");
+            bGetCont.setText("Verladen von Container");
+        }
     }
 
     @Override

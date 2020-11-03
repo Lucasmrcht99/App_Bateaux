@@ -22,13 +22,20 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
     private LoginActivity logAct;
     private boolean Connect;
     private Socket cliSock;
+    private String Langue;
 
-    public DoLogin(String log, String pswd, LoginActivity la)
+    public DoLogin(String log, String pswd, LoginActivity la,String lang)
     {
         login = log;
         pwd = pswd;
         logAct = la;
         Connect = false;
+        if(lang.equalsIgnoreCase("Francais"))
+            Langue="0";
+        else if(lang.equalsIgnoreCase("English"))
+            Langue="1";
+        else if(lang.equalsIgnoreCase("German"))
+            Langue="2";
     }
 
     @Override protected void onPreExecute() { super.onPreExecute(); }
@@ -43,8 +50,8 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
         ObjectInputStream ois=null;
         ObjectOutputStream oos=null;
         RequeteIOBREP req = new RequeteIOBREP(RequeteIOBREP.LOGIN, "");
-        String ipAddress = "192.168.0.7";
-        int port = 50005;
+        String ipAddress = "192.168.0.52";
+        int port = 50012;
         if(Connect == false)
         {
             try
@@ -94,6 +101,7 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
             {
                 logAct.suite = new Intent(logAct, MenuActivity.class);
                 logAct.suite.putExtra("User", rep.getChargeUtile());
+                logAct.suite.putExtra("Langue", Langue);
                 SocketHandler.setSock(cliSock);
                 logAct.startActivity(logAct.suite);
             }
