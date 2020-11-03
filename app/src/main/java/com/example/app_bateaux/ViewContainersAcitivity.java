@@ -13,12 +13,15 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import req_rep_IOBREP.RequeteIOBREP;
 
 public class ViewContainersAcitivity extends AppCompatActivity {
     ObjectInputStream ois=null;
@@ -30,6 +33,7 @@ public class ViewContainersAcitivity extends AppCompatActivity {
     private CheckBox checkBox;
     public Intent suite;
     private ListView mListView;
+    private boolean stop = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,7 @@ public class ViewContainersAcitivity extends AppCompatActivity {
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stop=false;
                 finish();
             }
         });
@@ -116,5 +121,27 @@ public class ViewContainersAcitivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        stop=false;
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(stop==true) {
+            try {
+                RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
+                oos = new ObjectOutputStream(cliSock.getOutputStream());
+                oos.writeObject(req2);
+                oos.flush();
+            } catch (IOException e) {
+                System.out.println("Connexion au serveur perdue");
+            }
+        }
+
     }
 }

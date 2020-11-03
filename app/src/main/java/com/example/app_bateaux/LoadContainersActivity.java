@@ -36,6 +36,7 @@ public class LoadContainersActivity extends Activity {
     public Intent suite;
     private ListView mListView;
     private String containerId;
+    private boolean stop = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class LoadContainersActivity extends Activity {
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stop=false;
                 finish();
             }
         });
@@ -126,5 +128,27 @@ public class LoadContainersActivity extends Activity {
         mListView.removeAllViewsInLayout();
         ContainerAdapter adapter = new ContainerAdapter(this,ListContainers);
         mListView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        stop=false;
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(stop==true) {
+            try {
+                RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
+                oos = new ObjectOutputStream(cliSock.getOutputStream());
+                oos.writeObject(req2);
+                oos.flush();
+            } catch (IOException e) {
+                System.out.println("Connexion au serveur perdue");
+            }
+        }
+
     }
 }

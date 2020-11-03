@@ -12,6 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import req_rep_IOBREP.RequeteIOBREP;
+
 public class AddSocieteActivity extends Activity {
 
     private EditText id;
@@ -20,6 +26,10 @@ public class AddSocieteActivity extends Activity {
     private EditText tel;
     private EditText adresse;
     public Intent suite;
+    ObjectOutputStream oos=null;
+    private boolean stop = true;
+    private Socket cliSock;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,7 @@ public class AddSocieteActivity extends Activity {
         mail = (EditText) this.findViewById(R.id.editTextMail);
         tel = (EditText) this.findViewById(R.id.editTextTel);
         adresse = (EditText) this.findViewById(R.id.editTextAdresse);
+        cliSock=SocketHandler.getSock();
         AddSocieteActivity addSocAct = this;
 
         ((Button) this.findViewById(R.id.buttonAjouterSoc)).setOnClickListener(new View.OnClickListener() {
@@ -67,9 +78,32 @@ public class AddSocieteActivity extends Activity {
         ((ImageButton) this.findViewById(R.id.imageButtonReturn4)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stop=false;
                 finish();
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+        stop=false;
+        finish();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(stop==true) {
+            try {
+                RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
+                oos = new ObjectOutputStream(cliSock.getOutputStream());
+                oos.writeObject(req2);
+                oos.flush();
+            } catch (IOException e) {
+                System.out.println("Connexion au serveur perdue");
+            }
+        }
 
     }
 }

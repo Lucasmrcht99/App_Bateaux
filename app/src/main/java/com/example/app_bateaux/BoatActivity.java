@@ -17,9 +17,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import req_rep_IOBREP.RequeteIOBREP;
 
 public class BoatActivity extends Activity {
     private EditText id;
@@ -28,6 +33,9 @@ public class BoatActivity extends Activity {
     private Spinner dest;
     private CheckBox vide;
     public Intent suite;
+    ObjectOutputStream oos=null;
+    private Socket cliSock;
+    private boolean stop = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,11 +55,13 @@ public class BoatActivity extends Activity {
         dest = (Spinner) this.findViewById(R.id.spinner2);
         vide = (CheckBox) this.findViewById(R.id.checkBoxVide);
         BoatActivity boatActivity = this;
+        cliSock=SocketHandler.getSock();
         DoGetDestinations doGetDest = new DoGetDestinations(this);
         doGetDest.doInBackground();
 
         ((ImageButton) this.findViewById(R.id.imageButtonReturn2)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                stop=false;
                 finish();
             }
         });
@@ -110,5 +120,27 @@ public class BoatActivity extends Activity {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         dest.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        stop=false;
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(stop==true) {
+            try {
+                RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
+                oos = new ObjectOutputStream(cliSock.getOutputStream());
+                oos.writeObject(req2);
+                oos.flush();
+            } catch (IOException e) {
+                System.out.println("Connexion au serveur perdue");
+            }
+        }
+
     }
 }
