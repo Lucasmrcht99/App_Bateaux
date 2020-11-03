@@ -125,9 +125,9 @@ public class MenuActivity extends Activity {
                 String dest =data.getStringExtra("destination");
                 String vide =data.getStringExtra("vide");
 
-                Bateau b = new Bateau(id,cap,dest,vide);
+                boat = new Bateau(id,cap,dest,vide);
                 TextView idBoat = (TextView) findViewById(R.id.textViewBateau);
-                idBoat.setText(b.getId());
+                idBoat.setText(boat.getId());
             }
         }
     }

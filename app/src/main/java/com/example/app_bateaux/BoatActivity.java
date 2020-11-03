@@ -98,6 +98,7 @@ public class BoatActivity extends Activity {
                     returnIntent.putExtra("destination", Dest);
                     returnIntent.putExtra("vide", Vide);
                     setResult(1,returnIntent);
+                    stop=false;
                     finish();
                 }
                 if(code == 402)

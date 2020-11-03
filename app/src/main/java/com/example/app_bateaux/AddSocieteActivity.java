@@ -66,6 +66,7 @@ public class AddSocieteActivity extends Activity {
                 if(code == 201)
                 {
                     BoatActivity.societe.setText(Id);
+                    stop=false;
                     finish();
                 }
                 if(code == 401)
