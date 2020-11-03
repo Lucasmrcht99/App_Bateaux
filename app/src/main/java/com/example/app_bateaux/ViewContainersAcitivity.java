@@ -75,9 +75,7 @@ public class ViewContainersAcitivity extends AppCompatActivity {
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suite = new Intent(context, MenuActivity.class);
-                suite.putExtra("User", user);
-                context.startActivity(suite);
+                finish();
             }
         });
     }
