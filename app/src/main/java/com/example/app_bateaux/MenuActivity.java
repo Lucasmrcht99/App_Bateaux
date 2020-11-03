@@ -8,7 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -66,7 +65,7 @@ public class MenuActivity extends Activity {
             }
         });
 
-        Button bLoadCont = (Button)this.findViewById(R.id.buttonGetContainers);
+        Button bLoadCont = (Button)this.findViewById(R.id.buttonLoadContainers);
         bLoadCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

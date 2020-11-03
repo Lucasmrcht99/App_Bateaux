@@ -33,4 +33,5 @@
     <string name="mail_contact">Mail contact</string>
     <string name="tel_contact">Tel contact</string>
     <string name="ajouter">Ajouter</string>
+    <string name="d_chargement_des_containers">Déchargement des containers</string>
 </resources>

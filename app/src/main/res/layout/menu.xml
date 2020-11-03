@@ -8,6 +8,21 @@
     android:orientation="vertical"
     tools:context=".MenuActivity">
 
+    <Button
+        android:id="@+id/buttonUnloadContainers"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:background="#FFFF"
+        android:text="@string/d_chargement_des_containers"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.854" />
+
     <TextView
         android:id="@+id/textViewBateau"
         android:layout_width="106dp"
@@ -37,10 +52,25 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
+        app:layout_constraintVertical_bias="0.557" />
 
     <Button
-        android:id="@+id/buttonGetContainers"
+        android:id="@+id/buttonAffCont"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:background="#FFFF"
+        android:text="@string/liste_des_containers"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657" />
+
+    <Button
+        android:id="@+id/buttonLoadContainers"
         android:layout_width="272dp"
         android:layout_height="42dp"
         android:background="#FFFF"
@@ -52,7 +82,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.769" />
+        app:layout_constraintVertical_bias="0.756" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -135,21 +165,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.073" />
-
-    <Button
-        android:id="@+id/buttonAffCont"
-        android:layout_width="272dp"
-        android:layout_height="42dp"
-        android:background="#FFFF"
-        android:text="@string/liste_des_containers"
-        android:textColor="#0b7990"
-        android:theme="@style/AppTheme.Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
 
     <TextView
         android:id="@+id/textView10"
