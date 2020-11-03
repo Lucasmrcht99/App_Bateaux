@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/LL_Fond"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/listviewcontainer">
 
     <TextView
         android:id="@+id/Id"
         android:layout_width="66dp"
-        android:layout_height="26dp"
+        android:layout_height="45dp"
+        android:gravity="left|center_vertical"
         android:text="@string/id"
         android:textColor="#FFFF"
         android:textColorHighlight="#FFFF"
@@ -24,7 +26,8 @@
     <TextView
         android:id="@+id/Coord"
         android:layout_width="55dp"
-        android:layout_height="26dp"
+        android:layout_height="45dp"
+        android:gravity="left|center_vertical"
         android:text="@string/coord"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +40,8 @@
     <TextView
         android:id="@+id/Date"
         android:layout_width="89dp"
-        android:layout_height="25dp"
+        android:layout_height="45dp"
+        android:gravity="left|center_vertical"
         android:text="@string/date"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +53,8 @@
     <TextView
         android:id="@+id/Poids"
         android:layout_width="59dp"
-        android:layout_height="25dp"
+        android:layout_height="45dp"
+        android:gravity="left|center_vertical"
         android:text="@string/poids"
         android:textColor="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"

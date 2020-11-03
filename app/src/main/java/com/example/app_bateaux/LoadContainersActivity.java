@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,11 +33,22 @@ public class LoadContainersActivity extends Activity {
     private Button btnSubmit;
     private ImageButton btnReturn;
     private Button btnLoadCont;
+    private TextView boatInfo;
+    private TextView boatCapacite;
     private CheckBox checkBox;
     public Intent suite;
     private ListView mListView;
     private String containerId;
     private boolean stop = true;
+    private LoadContainersActivity context = this;
+    private Containers selectedContainer=null;
+    private String containersLoad="";
+    private String mode="0";
+    private Bateau boat;
+    private int pos;
+    ArrayList<Containers> ListContainers;
+    private int nombre=1;
+    private int capacite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,34 +65,29 @@ public class LoadContainersActivity extends Activity {
         window.setStatusBarColor(getColor(R.color.blue_app));
         cliSock=SocketHandler.getSock();
         btnSubmit = (Button) findViewById(R.id.buttonRecherche);
-        LoadContainersActivity context = this;
         checkBox = (CheckBox)findViewById(R.id.checkBox1);
         mListView = (ListView) findViewById(R.id.ListContainers2);
         btnReturn = (ImageButton) findViewById(R.id.imageButtonReturn);
         btnLoadCont = (Button) findViewById(R.id.buttonLoadContainer);
+        boatInfo = (TextView) findViewById(R.id.textViewBoatInfo);
+        boatCapacite = (TextView) findViewById(R.id.textViewBoatInfo2);
 
-
+        boat = MenuActivity.getBoat();
+        boatInfo.setText(boat.getId() + " - " + boat.getDestination());
+        boatCapacite.setText("Places restantes : " + boat.getCapacite());
+        capacite = Integer.parseInt(boat.getCapacite());
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListView.removeAllViewsInLayout();
-                String mode="0";
-                String chaine = "Flemalle";
-                if(chaine.equals(""))
+                if(checkBox.isChecked())
                 {
-                    AfficheToast.Affiche("Selectionnez une destination", context);
+                    mode="1";
                 }
-                else
-                {
-                    if(checkBox.isChecked())
-                    {
-                        mode="1";
-                    }
-                    System.out.println(mode);
-                    DoGetContainers doGetCont = new DoGetContainers(chaine, mode, context);
-                    doGetCont.doInBackground();
-                }
+                System.out.println(mode);
+                DoGetContainers doGetCont = new DoGetContainers(boat.getDestination(), mode, context);
+                doGetCont.doInBackground();
             }
         });
 
@@ -92,31 +99,73 @@ public class LoadContainersActivity extends Activity {
             }
         });
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for(int i=0; i < parent.getChildCount(); i++)
-                {
-                    parent.getChildAt(i).setBackgroundColor(Color.parseColor("#0b7990"));
-                }
-                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#00384d"));
-                Containers c = (Containers)mListView.getItemAtPosition(position);
-                containerId = c.getId();
-                System.out.println(containerId);
-            }
-        });
-
         btnLoadCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(btnLoadCont.getText().toString().equalsIgnoreCase("ANNULER CHARGEMENT"))
+                {
+                    boat=null;
+                    MenuActivity.setBoatNull();
+                    stop=false;
+                    finish();
+                }
+                if(btnLoadCont.getText().toString().equalsIgnoreCase("CHARGER UN CONTAINER"))
+                {
+                    if(selectedContainer!=null)
+                    {
+                        if(capacite > 0)
+                        {
+                            DoHandleContainerOut doHandleContainerOut = new DoHandleContainerOut(context, selectedContainer.getId(), mode, boat.getDestination(), nombre);
+                            int code = doHandleContainerOut.doInBackground();
+                            if(code == 201)
+                            {
+                                checkBox.setEnabled(false);
+                                btnSubmit.setEnabled(false);
+                                capacite--;
+                                boatCapacite.setText("Places restantes : " + capacite);
+                                if(capacite==0) {
+                                    btnLoadCont.setText("Finir chargement");
+                                }
+                                if(containersLoad.equals("")) {
+                                    containersLoad = selectedContainer.getId();
+                                }
+                                else {
+                                    containersLoad = containersLoad +  "&" + selectedContainer.getId();
+                                }
+                                removeList();
+                                selectedContainer = null;
+                                nombre++;
+                            }
+                            else
+                            {
+                                if(code == 401)
+                                {
+                                    AfficheToast.Affiche("Not first container !", context);
+                                }
+                                else
+                                {
+                                    AfficheToast.Affiche("Container inexistant !", context);
+                                    removeList();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            AfficheToast.Affiche("Plus de place disponible dans le bateau !", context);
+                        }
+                    }
+                }
+                if(btnLoadCont.getText().toString().equalsIgnoreCase("Finir chargement"))
+                {
 
+                }
             }
         });
     }
 
     public void setListView(String str)
     {
-        ArrayList<Containers> ListContainers = new ArrayList<Containers>();
+        ListContainers = new ArrayList<Containers>();
 
         StringTokenizer st1 = new StringTokenizer(str, "&");
         while(st1.hasMoreElements())
@@ -128,6 +177,44 @@ public class LoadContainersActivity extends Activity {
         mListView.removeAllViewsInLayout();
         ContainerAdapter adapter = new ContainerAdapter(this,ListContainers);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedContainer = (Containers) adapter.getItem(position);
+                pos = position;
+            }
+        });
+    }
+
+    public void removeList()
+    {
+        ListContainers.remove(pos);
+        mListView.removeAllViewsInLayout();
+        ContainerAdapter adapter;
+        if(ListContainers.size() == 0)
+        {
+            btnLoadCont.setText("Finir chargement");
+            adapter = new ContainerAdapter(this, new ArrayList<Containers>());
+            mListView.setAdapter(adapter);
+            selectedContainer = null;
+        }
+        else
+        {
+            adapter = new ContainerAdapter(this,ListContainers);
+            mListView.setAdapter(adapter);
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    selectedContainer = (Containers) adapter.getItem(position);
+                    pos = position;
+                }
+            });
+        }
+    }
+
+    public void setBtnTxt()
+    {
+        btnLoadCont.setText("ANNULER CHARGEMENT");
     }
 
     @Override

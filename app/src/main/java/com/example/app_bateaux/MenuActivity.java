@@ -24,7 +24,8 @@ public class MenuActivity extends Activity {
     private Socket cliSock;
     public Intent suite;
     private  String lang="";
-    private Bateau boat;
+    private static Bateau boat;
+    private static TextView idBoat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MenuActivity extends Activity {
         user = (String)this.getIntent().getExtras().get("User");
         lang = (String)this.getIntent().getExtras().get("Langue");
         boat = new Bateau();
+        idBoat = (TextView) findViewById(R.id.textViewBateau);
 
         cliSock = SocketHandler.getSock();
 
@@ -80,7 +82,6 @@ public class MenuActivity extends Activity {
                     {
                         AfficheToast.Affiche("Le bateau n'est pas vide !", menuAct);
                     }
-
                 }
                 else
                 {
@@ -126,18 +127,18 @@ public class MenuActivity extends Activity {
                 String vide =data.getStringExtra("vide");
 
                 boat = new Bateau(id,cap,dest,vide);
-                TextView idBoat = (TextView) findViewById(R.id.textViewBateau);
                 idBoat.setText(boat.getId());
             }
         }
     }
 
-    public void setBoatNull()
+    public static void setBoatNull()
     {
         boat = new Bateau();
+        idBoat.setText("");
     }
 
-    public Bateau getBoat()
+    public static Bateau getBoat()
     {
         return boat;
     }

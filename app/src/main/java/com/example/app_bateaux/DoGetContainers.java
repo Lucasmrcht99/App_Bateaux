@@ -81,20 +81,23 @@ public class DoGetContainers extends AsyncTask<Void, Void, Void> {
             ois = new ObjectInputStream(cliSock.getInputStream());
             rep = (ReponseIOBREP)ois.readObject();
 
-            if(rep.getCode() == ReponseIOBREP.OK)
-            {
-                if(viewAct == null)
-                {
+            if(viewAct == null) {
+                if (rep.getCode() == ReponseIOBREP.OK) {
                     loadAct.setListView(rep.getChargeUtile());
                 }
-                else
-                {
-                    viewAct.setListView(rep.getChargeUtile());
+                else {
+                    AfficheToast.Affiche(rep.getChargeUtile(), loadAct);
+                    loadAct.setBtnTxt();
                 }
             }
             else
             {
-                AfficheToast.Affiche(rep.getChargeUtile(), viewAct);
+                if (rep.getCode() == ReponseIOBREP.OK) {
+                    viewAct.setListView(rep.getChargeUtile());
+                }
+                else {
+                    AfficheToast.Affiche(rep.getChargeUtile(), viewAct);
+                }
             }
         }
         catch (ClassNotFoundException  e)
