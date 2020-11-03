@@ -44,6 +44,20 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".BoatActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".AddSocieteActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

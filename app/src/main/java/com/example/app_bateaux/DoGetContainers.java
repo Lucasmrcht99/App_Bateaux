@@ -11,17 +11,27 @@ import java.net.Socket;
 import req_rep_IOBREP.ReponseIOBREP;
 import req_rep_IOBREP.RequeteIOBREP;
 
-public class DoGetContainersLoad extends AsyncTask<Void, Void, Void> {
+public class DoGetContainers extends AsyncTask<Void, Void, Void> {
 
     private String destination;
     private String mode;
+    private ViewContainersAcitivity viewAct;
     private LoadContainersActivity loadAct;
 
-    public DoGetContainersLoad(String dest, String mod, LoadContainersActivity context)
+    public DoGetContainers(String dest, String mod, ViewContainersAcitivity context)
+    {
+        destination = dest;
+        mode = mod;
+        viewAct = context;
+        loadAct = null;
+    }
+
+    public DoGetContainers(String dest, String mod, LoadContainersActivity context)
     {
         destination = dest;
         mode = mod;
         loadAct = context;
+        viewAct = null;
     }
 
     @Override protected void onPreExecute() { super.onPreExecute(); }
@@ -47,10 +57,21 @@ public class DoGetContainersLoad extends AsyncTask<Void, Void, Void> {
         catch (IOException e)
         {
             System.out.println("--- erreur IO = " + e.getMessage());
-            AfficheToast.Affiche( "Connexion au serveur perdue", loadAct);
-            loadAct.suite = new Intent(loadAct, LoginActivity.class);
-            loadAct.startActivity(loadAct.suite);
-            loadAct.finish();
+            if(viewAct == null)
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", loadAct);
+                loadAct.suite = new Intent(loadAct, LoginActivity.class);
+                loadAct.startActivity(loadAct.suite);
+                loadAct.finish();
+            }
+            else
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", viewAct);
+                viewAct.suite = new Intent(viewAct, LoginActivity.class);
+                viewAct.startActivity(viewAct.suite);
+                viewAct.finish();
+            }
+
             return null;
         }
         // Lecture de la réponse
@@ -62,11 +83,18 @@ public class DoGetContainersLoad extends AsyncTask<Void, Void, Void> {
 
             if(rep.getCode() == ReponseIOBREP.OK)
             {
-                loadAct.setListView(rep.getChargeUtile());
+                if(viewAct == null)
+                {
+                    loadAct.setListView(rep.getChargeUtile());
+                }
+                else
+                {
+                    viewAct.setListView(rep.getChargeUtile());
+                }
             }
             else
             {
-                AfficheToast.Affiche(rep.getChargeUtile(), loadAct);
+                AfficheToast.Affiche(rep.getChargeUtile(), viewAct);
             }
         }
         catch (ClassNotFoundException  e)
@@ -76,10 +104,20 @@ public class DoGetContainersLoad extends AsyncTask<Void, Void, Void> {
         catch (IOException e)
         {
             System.out.println("--- erreur IO = " + e.getMessage());
-            AfficheToast.Affiche( "Connexion au serveur perdue", loadAct);
-            loadAct.suite = new Intent(loadAct, LoginActivity.class);
-            loadAct.startActivity(loadAct.suite);
-            loadAct.finish();
+            if(viewAct == null)
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", loadAct);
+                loadAct.suite = new Intent(loadAct, LoginActivity.class);
+                loadAct.startActivity(loadAct.suite);
+                loadAct.finish();
+            }
+            else
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", viewAct);
+                viewAct.suite = new Intent(viewAct, LoginActivity.class);
+                viewAct.startActivity(viewAct.suite);
+                viewAct.finish();
+            }
         }
         return null ;
     }

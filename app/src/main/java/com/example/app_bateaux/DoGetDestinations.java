@@ -14,10 +14,18 @@ import req_rep_IOBREP.RequeteIOBREP;
 public class DoGetDestinations  extends AsyncTask<Void, Void, Void> {
 
     private ViewContainersAcitivity viewContAct;
+    private BoatActivity boatAct;
 
     public DoGetDestinations(ViewContainersAcitivity context)
     {
         viewContAct = context;
+        boatAct = null;
+    }
+
+    public DoGetDestinations(BoatActivity context)
+    {
+        viewContAct = null;
+        boatAct = context;
     }
 
     @Override protected void onPreExecute() { super.onPreExecute(); }
@@ -41,10 +49,20 @@ public class DoGetDestinations  extends AsyncTask<Void, Void, Void> {
         catch (IOException e)
         {
             System.out.println("--- erreur IO = " + e.getMessage());
-            AfficheToast.Affiche( "Connexion au serveur perdue", viewContAct);
-            viewContAct.suite = new Intent(viewContAct, LoginActivity.class);
-            viewContAct.startActivity(viewContAct.suite);
-            viewContAct.finish();
+            if(viewContAct == null)
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", boatAct);
+                boatAct.suite = new Intent(boatAct, LoginActivity.class);
+                boatAct.startActivity(boatAct.suite);
+                boatAct.finish();
+            }
+            else
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", viewContAct);
+                viewContAct.suite = new Intent(viewContAct, LoginActivity.class);
+                viewContAct.startActivity(viewContAct.suite);
+                viewContAct.finish();
+            }
         }
         // Lecture de la réponse
         ReponseIOBREP rep = null;
@@ -57,17 +75,34 @@ public class DoGetDestinations  extends AsyncTask<Void, Void, Void> {
             {
                 if(!rep.getChargeUtile().equals(""))
                 {
-                    viewContAct.addItemsOnSpinner(rep.getChargeUtile());
+                    if(viewContAct == null)
+                    {
+                        boatAct.addItemsOnSpinner(rep.getChargeUtile());
+                    }
+                    else
+                    {
+                        viewContAct.addItemsOnSpinner(rep.getChargeUtile());
+                    }
                 }
             }
         }
         catch (IOException e)
         {
             System.out.println("--- erreur IO = " + e.getMessage());
-            AfficheToast.Affiche( "Connexion au serveur perdue", viewContAct);
-            viewContAct.suite = new Intent(viewContAct, LoginActivity.class);
-            viewContAct.startActivity(viewContAct.suite);
-            viewContAct.finish();
+            if(viewContAct == null)
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", boatAct);
+                boatAct.suite = new Intent(boatAct, LoginActivity.class);
+                boatAct.startActivity(boatAct.suite);
+                boatAct.finish();
+            }
+            else
+            {
+                AfficheToast.Affiche( "Connexion au serveur perdue", viewContAct);
+                viewContAct.suite = new Intent(viewContAct, LoginActivity.class);
+                viewContAct.startActivity(viewContAct.suite);
+                viewContAct.finish();
+            }
         }
         catch (ClassNotFoundException  e)
         {

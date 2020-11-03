@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +25,24 @@ public class MenuActivity extends Activity {
     private Socket cliSock;
     public Intent suite;
     private  String lang="";
+    private Bateau boat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+        Window window = getWindow();
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(getColor(R.color.blue_app));
         user = (String)this.getIntent().getExtras().get("User");
         lang = (String)this.getIntent().getExtras().get("Langue");
-
-
+        boat = new Bateau();
 
         cliSock = SocketHandler.getSock();
 
@@ -44,17 +54,39 @@ public class MenuActivity extends Activity {
         bBoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(boat.getId().equals(""))
+                {
+                    suite = new Intent(menuAct, BoatActivity.class);
+                    menuAct.startActivityForResult(suite, 1);
+                }
+                else
+                {
+                    AfficheToast.Affiche("Il y a déjà un bateau à quai !", menuAct);
+                }
             }
         });
 
-        Button bGetCont = (Button)this.findViewById(R.id.buttonGetContainers);
-        bGetCont.setOnClickListener(new View.OnClickListener() {
+        Button bLoadCont = (Button)this.findViewById(R.id.buttonGetContainers);
+        bLoadCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suite = new Intent(menuAct, LoadContainersActivity.class);
-                suite.putExtra("User", user);
-                menuAct.startActivity(suite);
+                if(!boat.getId().equals(""))
+                {
+                    if(boat.getVide().equals("vide"))
+                    {
+                        suite = new Intent(menuAct, LoadContainersActivity.class);
+                        menuAct.startActivity(suite);
+                    }
+                    else
+                    {
+                        AfficheToast.Affiche("Le bateau n'est pas vide !", menuAct);
+                    }
+
+                }
+                else
+                {
+                    AfficheToast.Affiche("Il n'y a pas de bateau à quai !", menuAct);
+                }
             }
         });
 
@@ -63,7 +95,6 @@ public class MenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 suite = new Intent(menuAct, ViewContainersAcitivity.class);
-                suite.putExtra("User", user);
                 menuAct.startActivity(suite);
             }
         });
@@ -72,7 +103,7 @@ public class MenuActivity extends Activity {
         {
             bBoat.setText("Boat Arrived");
             bListCont.setText("List of containers");
-            bGetCont.setText("Loading of containers");
+            bLoadCont.setText("Loading of containers");
         }
         else if (lang.equalsIgnoreCase("2"))
         {
@@ -80,8 +111,36 @@ public class MenuActivity extends Activity {
             texttop.setText("Menü");
             bBoat.setText("Boot angekommen");
             bListCont.setText("Liste der Container");
-            bGetCont.setText("Verladen von Container");
+            bLoadCont.setText("Verladen von Container");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if(resultCode == 1){
+                String id =data.getStringExtra("boatId");
+                String cap =data.getStringExtra("capacite");
+                String dest =data.getStringExtra("destination");
+                String vide =data.getStringExtra("vide");
+
+                Bateau b = new Bateau(id,cap,dest,vide);
+                TextView idBoat = (TextView) findViewById(R.id.textViewBateau);
+                idBoat.setText(b.getId());
+            }
+        }
+    }
+
+    public void setBoatNull()
+    {
+        boat = new Bateau();
+    }
+
+    public Bateau getBoat()
+    {
+        return boat;
     }
 
     @Override

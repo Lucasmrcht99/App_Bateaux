@@ -212,4 +212,6 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+app/src/main/java/com/example/app_bateaux/DoLogin.java
+
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,15 +35,22 @@ public class LoadContainersActivity extends Activity {
     private CheckBox checkBox;
     public Intent suite;
     private ListView mListView;
-    private String user;
     private String containerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_containers);
+        Window window = getWindow();
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(getColor(R.color.blue_app));
         cliSock=SocketHandler.getSock();
-        user = (String)this.getIntent().getExtras().get("User");
         btnSubmit = (Button) findViewById(R.id.buttonRecherche);
         LoadContainersActivity context = this;
         checkBox = (CheckBox)findViewById(R.id.checkBox1);
@@ -68,7 +77,7 @@ public class LoadContainersActivity extends Activity {
                         mode="1";
                     }
                     System.out.println(mode);
-                    DoGetContainersLoad doGetCont = new DoGetContainersLoad(chaine, mode, context);
+                    DoGetContainers doGetCont = new DoGetContainers(chaine, mode, context);
                     doGetCont.doInBackground();
                 }
             }
@@ -117,20 +126,5 @@ public class LoadContainersActivity extends Activity {
         mListView.removeAllViewsInLayout();
         ContainerAdapter adapter = new ContainerAdapter(this,ListContainers);
         mListView.setAdapter(adapter);
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-            RequeteIOBREP req2 = new RequeteIOBREP(RequeteIOBREP.CLOSE, "");
-            oos = new ObjectOutputStream(cliSock.getOutputStream());
-            oos.writeObject(req2);
-            oos.flush();
-        }
-        catch (IOException e) {
-            System.out.println("Connexion au serveur perdue");
-        }
     }
 }
