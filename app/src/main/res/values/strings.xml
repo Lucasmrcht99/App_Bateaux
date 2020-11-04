@@ -34,4 +34,8 @@
     <string name="tel_contact">Tel contact</string>
     <string name="ajouter">Ajouter</string>
     <string name="d_chargement_des_containers">Déchargement des containers</string>
+    <string name="choix_du_language">Choix du language</string>
+    <string name="english">English</string>
+    <string name="francais">Francais</string>
+    <string name="german">German</string>
 </resources>

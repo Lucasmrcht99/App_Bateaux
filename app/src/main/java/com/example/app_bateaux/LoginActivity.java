@@ -23,8 +23,6 @@ public class LoginActivity extends Activity {
     private String pwd="";
     public Intent suite;
     private Button bLogin;
-    private Spinner spinner;
-    private String langue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +41,7 @@ public class LoginActivity extends Activity {
         LoginActivity logAct = this;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        spinner = (Spinner) findViewById(R.id.spinner);
 
-        setlangue();
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,29 +49,14 @@ public class LoginActivity extends Activity {
                 login = edit.getText().toString();
                 edit = (EditText)findViewById(R.id.editTextPassword);
                 pwd = edit.getText().toString();
-                langue = spinner.getSelectedItem().toString();
                 System.out.println(login + pwd);
                 if(!login.equals("") && login!=null && !pwd.equals("") && pwd!=null)
                 {
-                    DoLogin doLog = new DoLogin(login, pwd, logAct,langue);
+                    DoLogin doLog = new DoLogin(login, pwd, logAct);
                     doLog.doInBackground();
                 }
             }
         });
     }
 
-    public void setlangue() {
-
-        ArrayList<String> Listlangue = new ArrayList<String>();
-        Listlangue.add("Francais");
-        Listlangue.add("English");
-        Listlangue.add("German");
-
-        spinner.removeAllViewsInLayout();
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, Listlangue);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner.setAdapter(dataAdapter);
-    }
 }

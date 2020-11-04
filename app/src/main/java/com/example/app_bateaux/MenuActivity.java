@@ -1,8 +1,12 @@
 package com.example.app_bateaux;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Locale;
 
 import req_rep_IOBREP.RequeteIOBREP;
 
@@ -26,11 +31,46 @@ public class MenuActivity extends Activity {
     private  String lang="";
     private static Bateau boat;
     private static TextView idBoat;
+    private Context context;
+    private Resources resources;
+    private Locale Langlocal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu);
+        lang = (String)this.getIntent().getExtras().get("Langue");
+        if(lang.equalsIgnoreCase("fr"))
+        {
+            Locale locale = new Locale(lang);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+
+
+        }
+        else if (lang.equalsIgnoreCase("en"))
+        {
+            Locale locale = new Locale(lang);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+
+        }
+        else if (lang.equalsIgnoreCase("de"))
+        {
+            Locale locale = new Locale(lang);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+
+        }
+        this.setContentView(R.layout.menu);
         Window window = getWindow();
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -41,7 +81,6 @@ public class MenuActivity extends Activity {
         // finally change the color
         window.setStatusBarColor(getColor(R.color.blue_app));
         user = (String)this.getIntent().getExtras().get("User");
-        lang = (String)this.getIntent().getExtras().get("Langue");
         boat = new Bateau();
         idBoat = (TextView) findViewById(R.id.textViewBateau);
 
@@ -99,20 +138,7 @@ public class MenuActivity extends Activity {
             }
         });
 
-        if(lang.equalsIgnoreCase("1"))
-        {
-            bBoat.setText("Boat Arrived");
-            bListCont.setText("List of containers");
-            bLoadCont.setText("Loading of containers");
-        }
-        else if (lang.equalsIgnoreCase("2"))
-        {
-            TextView texttop = (TextView)findViewById(R.id.textView);
-            texttop.setText("Menü");
-            bBoat.setText("Boot angekommen");
-            bListCont.setText("Liste der Container");
-            bLoadCont.setText("Verladen von Container");
-        }
+
     }
 
     @Override

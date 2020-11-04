@@ -1,6 +1,7 @@
 package com.example.app_bateaux;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 
@@ -22,20 +23,13 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
     private LoginActivity logAct;
     private boolean Connect;
     private Socket cliSock;
-    private String Langue;
 
-    public DoLogin(String log, String pswd, LoginActivity la,String lang)
+    public DoLogin(String log, String pswd, LoginActivity la)
     {
         login = log;
         pwd = pswd;
         logAct = la;
         Connect = false;
-        if(lang.equalsIgnoreCase("Francais"))
-            Langue="0";
-        else if(lang.equalsIgnoreCase("English"))
-            Langue="1";
-        else if(lang.equalsIgnoreCase("German"))
-            Langue="2";
     }
 
     @Override protected void onPreExecute() { super.onPreExecute(); }
@@ -99,9 +93,8 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
 
             if(rep.getCode() == ReponseIOBREP.OK)
             {
-                logAct.suite = new Intent(logAct, MenuActivity.class);
+                logAct.suite = new Intent(logAct, ChoixLangue.class);
                 logAct.suite.putExtra("User", rep.getChargeUtile());
-                logAct.suite.putExtra("Langue", Langue);
                 SocketHandler.setSock(cliSock);
                 logAct.startActivity(logAct.suite);
             }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">App_Bateaux</string>
+    <string name="login_d_un_responsable_de_dock">Bienvenue sur App_Bateaux</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="login">Login</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="docker">Docker :</string>
+    <string name="logologin">logologin</string>
+    <string name="menu">Menü</string>
+    <string name="chargement_des_containers">Container-Beladung</string>
+    <string name="r_sultats">Résultats</string>
+    <string name="trier_par_anciennet">Trier par ancienneté</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="poids">Poids</string>
+    <string name="date">Date</string>
+    <string name="coord">Coord</string>
+    <string name="id">Id</string>
+    <string name="charger_container">Charger un Container</string>
+    <string name="affichage_des_containers">Affichage des Containers</string>
+    <string name="liste_des_containers">Liste der Container</string>
+    <string name="bateau_arriv">Boot angekommen</string>
+    <string name="todo">TODO</string>
+    <string name="arriv_e_d_un_bateau">Arrivée d\'un bateau</string>
+    <string name="identifiant">Identifiant</string>
+    <string name="soci_t">Société</string>
+    <string name="capacit">Capacité</string>
+    <string name="destination">Destination</string>
+    <string name="valider">Valider</string>
+    <string name="bateau">Boot :</string>
+    <string name="ajout_d_une_soci_t">Ajout d\'une société</string>
+    <string name="nom_contact">Nom contact</string>
+    <string name="adresse">Adresse</string>
+    <string name="mail_contact">Mail contact</string>
+    <string name="tel_contact">Tel contact</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="d_chargement_des_containers">Entladen von Containern</string>
+</resources>
