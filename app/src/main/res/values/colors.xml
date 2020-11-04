@@ -11,4 +11,5 @@
     <color name="blue_2">#003366</color>
     <color name="blue_app">#0b7990</color>
     <color name="blue_selected">#00384d</color>
+    <color name="red">#ff0000</color>
 </resources>

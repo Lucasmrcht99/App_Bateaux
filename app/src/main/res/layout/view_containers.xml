@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0b7990"
-    tools:context=".ViewContainersAcitivity">
+    tools:context=".ViewContainersActivity">
 
     <TextView
         android:id="@+id/poids3"

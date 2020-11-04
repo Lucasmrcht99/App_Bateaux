@@ -15,10 +15,10 @@ public class DoGetContainers extends AsyncTask<Void, Void, Void> {
 
     private String destination;
     private String mode;
-    private ViewContainersAcitivity viewAct;
+    private ViewContainersActivity viewAct;
     private LoadContainersActivity loadAct;
 
-    public DoGetContainers(String dest, String mod, ViewContainersAcitivity context)
+    public DoGetContainers(String dest, String mod, ViewContainersActivity context)
     {
         destination = dest;
         mode = mod;

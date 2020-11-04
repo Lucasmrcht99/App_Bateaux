@@ -22,6 +22,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import req_rep_IOBREP.ReponseIOBREP;
 import req_rep_IOBREP.RequeteIOBREP;
 
 public class LoadContainersActivity extends Activity {
@@ -85,6 +86,10 @@ public class LoadContainersActivity extends Activity {
                 {
                     mode="1";
                 }
+                else
+                {
+                    mode="0";
+                }
                 System.out.println(mode);
                 DoGetContainers doGetCont = new DoGetContainers(boat.getDestination(), mode, context);
                 doGetCont.doInBackground();
@@ -117,7 +122,7 @@ public class LoadContainersActivity extends Activity {
                         {
                             DoHandleContainerOut doHandleContainerOut = new DoHandleContainerOut(context, selectedContainer.getId(), mode, boat.getDestination(), nombre);
                             int code = doHandleContainerOut.doInBackground();
-                            if(code == 201)
+                            if(code == ReponseIOBREP.OK)
                             {
                                 checkBox.setEnabled(false);
                                 btnSubmit.setEnabled(false);
@@ -135,10 +140,11 @@ public class LoadContainersActivity extends Activity {
                                 removeList();
                                 selectedContainer = null;
                                 nombre++;
+                                AfficheToast.Affiche("Container chargé !", context);
                             }
                             else
                             {
-                                if(code == 401)
+                                if(code == ReponseIOBREP.FAIL)
                                 {
                                     AfficheToast.Affiche("Not first container !", context);
                                 }

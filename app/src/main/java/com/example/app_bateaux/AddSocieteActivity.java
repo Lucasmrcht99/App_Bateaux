@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import req_rep_IOBREP.ReponseIOBREP;
 import req_rep_IOBREP.RequeteIOBREP;
 
 public class AddSocieteActivity extends Activity {
@@ -63,13 +64,15 @@ public class AddSocieteActivity extends Activity {
                 DoAddSociete doAddSociete = new DoAddSociete(addSocAct, Id, Nom, Mail, Tel, Adresse);
                 int code = doAddSociete.doInBackground();
 
-                if(code == 201)
+                if(code == ReponseIOBREP.OK)
                 {
-                    BoatActivity.societe.setText(Id);
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("societe", Id);
+                    setResult(1,returnIntent);
                     stop=false;
                     finish();
                 }
-                if(code == 401)
+                if(code == ReponseIOBREP.FAIL)
                 {
                     AfficheToast.Affiche("Société existante !", addSocAct);
                 }

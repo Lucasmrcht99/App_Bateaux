@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -129,8 +128,31 @@ public class MenuActivity extends Activity {
         bListCont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suite = new Intent(menuAct, ViewContainersAcitivity.class);
+                suite = new Intent(menuAct, ViewContainersActivity.class);
                 menuAct.startActivity(suite);
+            }
+        });
+
+        Button unLoadCont = (Button)this.findViewById(R.id.buttonUnloadContainers);
+        unLoadCont.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!boat.getId().equals(""))
+                {
+                    if(!boat.getVide().equals("vide"))
+                    {
+                        suite = new Intent(menuAct, UnloadContainersActivity.class);
+                        menuAct.startActivity(suite);
+                    }
+                    else
+                    {
+                        AfficheToast.Affiche("Le bateau est déjà vide !", menuAct);
+                    }
+                }
+                else
+                {
+                    AfficheToast.Affiche("Il n'y a pas de bateau à quai !", menuAct);
+                }
             }
         });
 
@@ -158,6 +180,11 @@ public class MenuActivity extends Activity {
     {
         boat = new Bateau();
         idBoat.setText("");
+    }
+
+    public static void setBoatVide()
+    {
+        boat.setVide("vide");
     }
 
     public static Bateau getBoat()

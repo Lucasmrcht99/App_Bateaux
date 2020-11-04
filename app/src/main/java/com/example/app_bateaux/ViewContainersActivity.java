@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 
 import req_rep_IOBREP.RequeteIOBREP;
 
-public class ViewContainersAcitivity extends AppCompatActivity {
+public class ViewContainersActivity extends AppCompatActivity {
     ObjectInputStream ois=null;
     ObjectOutputStream oos=null;
     private Socket cliSock;
@@ -51,7 +51,7 @@ public class ViewContainersAcitivity extends AppCompatActivity {
         window.setStatusBarColor(getColor(R.color.blue_app));
         cliSock=SocketHandler.getSock();
         btnSubmit = (Button) findViewById(R.id.buttonRecherche3);
-        ViewContainersAcitivity context = this;
+        ViewContainersActivity context = this;
         checkBox = (CheckBox)findViewById(R.id.checkBox2);
         mListView = (ListView) findViewById(R.id.ListContainers2);
         btnReturn = (ImageButton) findViewById(R.id.imageButtonReturn3);

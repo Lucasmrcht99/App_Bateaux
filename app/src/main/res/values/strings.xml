@@ -38,4 +38,8 @@
     <string name="english">English</string>
     <string name="francais">Francais</string>
     <string name="german">German</string>
+    <string name="container_id">Container Id</string>
+    <string name="contenu">Contenu</string>
+    <string name="dangers">Dangers</string>
+    <string name="d_charger_le_container">Décharger le container</string>
 </resources>

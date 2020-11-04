@@ -71,6 +71,7 @@ public class ChoixLangue extends Activity {
                 intent.putExtra("Langue", "en");
 
                 startActivity(intent);
+                stop=false;
                 finish();
 
             }
@@ -83,6 +84,7 @@ public class ChoixLangue extends Activity {
                 intent.putExtra("User", user);
                 intent.putExtra("Langue", "de");
                 startActivity(intent);
+                stop=false;
                 finish();
 
             }

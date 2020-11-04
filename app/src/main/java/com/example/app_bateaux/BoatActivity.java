@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import req_rep_IOBREP.ReponseIOBREP;
 import req_rep_IOBREP.RequeteIOBREP;
 
 public class BoatActivity extends Activity {
@@ -70,7 +71,7 @@ public class BoatActivity extends Activity {
             @Override
             public void onClick(View v) {
                 suite = new Intent(boatActivity, AddSocieteActivity.class);
-                boatActivity.startActivity(suite);
+                boatActivity.startActivityForResult(suite, 1);
             }
         });
 
@@ -90,7 +91,7 @@ public class BoatActivity extends Activity {
                 DoAddBoat doAddBoat = new DoAddBoat(boatActivity, Id, Societe, Capacite);
                 int code = doAddBoat.doInBackground();
 
-                if(code == 201 || code == 401)
+                if(code == ReponseIOBREP.OK || code == ReponseIOBREP.FAIL)
                 {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("boatId", Id);
@@ -101,7 +102,7 @@ public class BoatActivity extends Activity {
                     stop=false;
                     finish();
                 }
-                if(code == 402)
+                if(code == ReponseIOBREP.FAIL2)
                 {
                     AfficheToast.Affiche("Société inexistante !", boatActivity);
                 }
@@ -121,6 +122,18 @@ public class BoatActivity extends Activity {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         dest.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if(resultCode == 1){
+                String soc =data.getStringExtra("societe");
+                societe.setText(soc);
+            }
+        }
     }
 
     @Override
