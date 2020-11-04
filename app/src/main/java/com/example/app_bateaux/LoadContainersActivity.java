@@ -109,7 +109,7 @@ public class LoadContainersActivity extends Activity {
                     stop=false;
                     finish();
                 }
-                if(btnLoadCont.getText().toString().equalsIgnoreCase("CHARGER UN CONTAINER"))
+                else if(btnLoadCont.getText().toString().equalsIgnoreCase("CHARGER UN CONTAINER"))
                 {
                     if(selectedContainer!=null)
                     {
@@ -155,9 +155,11 @@ public class LoadContainersActivity extends Activity {
                         }
                     }
                 }
-                if(btnLoadCont.getText().toString().equalsIgnoreCase("Finir chargement"))
+                else if(btnLoadCont.getText().toString().equalsIgnoreCase("Finir chargement"))
                 {
-
+                    DoFinishLoading doFinishLoading = new DoFinishLoading(containersLoad,boat.getId(),context);
+                    doFinishLoading.doInBackground();
+                    stop=false;
                 }
             }
         });

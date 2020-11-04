@@ -31,7 +31,7 @@ public class MenuActivity extends Activity {
     private  String lang="";
     private static Bateau boat;
     private static TextView idBoat;
-    private Context context;
+    private static Context context;
     private Resources resources;
     private Locale Langlocal;
 
@@ -47,8 +47,6 @@ public class MenuActivity extends Activity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());
-
-
         }
         else if (lang.equalsIgnoreCase("en"))
         {
@@ -58,7 +56,6 @@ public class MenuActivity extends Activity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());
-
         }
         else if (lang.equalsIgnoreCase("de"))
         {
@@ -68,7 +65,6 @@ public class MenuActivity extends Activity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());
-
         }
         this.setContentView(R.layout.menu);
         Window window = getWindow();
@@ -85,7 +81,7 @@ public class MenuActivity extends Activity {
         idBoat = (TextView) findViewById(R.id.textViewBateau);
 
         cliSock = SocketHandler.getSock();
-
+        context=this;
         TextView textView = (TextView)findViewById(R.id.textViewUser);
         textView.setText(user);
         MenuActivity menuAct = this;
@@ -181,5 +177,9 @@ public class MenuActivity extends Activity {
         catch (IOException e) {
             System.out.println("Connexion au serveur perdue");
         }
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }
