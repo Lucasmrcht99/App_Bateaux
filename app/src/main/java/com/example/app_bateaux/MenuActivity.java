@@ -38,34 +38,14 @@ public class MenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lang = (String)this.getIntent().getExtras().get("Langue");
-        if(lang.equalsIgnoreCase("fr"))
-        {
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
-        else if (lang.equalsIgnoreCase("en"))
-        {
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
-        else if (lang.equalsIgnoreCase("de"))
-        {
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+        getBaseContext().getResources().getDisplayMetrics());
         this.setContentView(R.layout.menu);
+
         Window window = getWindow();
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -129,6 +109,15 @@ public class MenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 suite = new Intent(menuAct, ViewContainersActivity.class);
+                menuAct.startActivity(suite);
+            }
+        });
+
+        Button graph = (Button)this.findViewById(R.id.buttonGraphique);
+        graph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suite = new Intent(menuAct, Gerergraphique.class);
                 menuAct.startActivity(suite);
             }
         });

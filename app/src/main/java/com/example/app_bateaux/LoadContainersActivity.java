@@ -163,7 +163,7 @@ public class LoadContainersActivity extends Activity {
                 }
                 else if(btnLoadCont.getText().toString().equalsIgnoreCase("Finir chargement"))
                 {
-                    DoFinishLoading doFinishLoading = new DoFinishLoading(containersLoad,boat.getId(),context);
+                    DoFinishLoading doFinishLoading = new DoFinishLoading(containersLoad,boat.getId(),context,boat.getDestination());
                     doFinishLoading.doInBackground();
                     stop=false;
                 }

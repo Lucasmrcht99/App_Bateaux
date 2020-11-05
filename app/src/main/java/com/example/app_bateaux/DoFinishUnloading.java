@@ -17,6 +17,7 @@ public class DoFinishUnloading extends AsyncTask<Void, Void, Integer> {
     private UnloadContainersActivity unloadAct;
     private ArrayList<Containers> listConainters;
     private String bateau;
+    private DatabaseManager db;
 
     public DoFinishUnloading(UnloadContainersActivity context, ArrayList<Containers> list, String b)
     {
@@ -74,6 +75,13 @@ public class DoFinishUnloading extends AsyncTask<Void, Void, Integer> {
             ois = new ObjectInputStream(cliSock.getInputStream());
             rep = (ReponseIOBREP)ois.readObject();
             unloadAct.setReponse(rep.getChargeUtile());
+            int taille = listConainters.size();
+            db = new DatabaseManager(unloadAct);
+            for(int i=0; i<taille; i++)
+            {
+                db.insertmouvarriv(listConainters.get(i).getId(),bateau,listConainters.get(i).getPoids(),listConainters.get(i).getDestination());
+            }
+            db.close();
         }
         catch (ClassNotFoundException  e)
         {

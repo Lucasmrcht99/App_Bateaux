@@ -42,4 +42,9 @@
     <string name="contenu">Contenu</string>
     <string name="dangers">Dangers</string>
     <string name="d_charger_le_container">Décharger le container</string>
+    <string name="voir_graphique">Voir Graphique</string>
+    <string name="graphiques_statistiques">Graphiques statistiques</string>
+    <string name="histogramme_des_containers">Histogramme des containers</string>
+    <string name="r_partition_des_containers">Répartition des containers</string>
+    <string name="afficher_histogramme">Afficher histogramme</string>
 </resources>

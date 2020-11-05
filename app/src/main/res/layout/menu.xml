@@ -9,6 +9,21 @@
     tools:context=".MenuActivity">
 
     <Button
+        android:id="@+id/buttonGraphique"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:background="#FFFF"
+        android:text="@string/voir_graphique"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.944" />
+
+    <Button
         android:id="@+id/buttonUnloadContainers"
         android:layout_width="272dp"
         android:layout_height="42dp"
