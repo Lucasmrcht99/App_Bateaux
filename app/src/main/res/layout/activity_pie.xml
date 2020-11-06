@@ -5,56 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0b7990"
-    tools:context=".AffHistogramme">
+    tools:context=".AffPie">
 
-    <ImageButton
-        android:id="@+id/imageButtonReturn7"
-        android:layout_width="46dp"
-        android:layout_height="41dp"
-        android:adjustViewBounds="true"
-        android:backgroundTint="#0b7990"
-        android:scaleType="fitCenter"
-        android:src="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/buttonAfficher"
-        android:layout_width="285dp"
-        android:layout_height="61dp"
-        android:backgroundTint="#FFFF"
-        android:text="@string/afficher_histogramme"
-        android:textColor="#0b7990"
-        android:theme="@style/AppTheme.Button"
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="205dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="yyyy/mm/dd"
+        android:inputType="date"
+        android:textColor="#FFFF"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192"
+        app:layout_constraintVertical_bias="0.173"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textViewchoix2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/histogramme_des_containers"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie"
+        android:layout_width="359dp"
+        android:layout_height="421dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.838" />
 
     <View
-        android:id="@+id/divider12"
+        android:id="@+id/divider13"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFFF"
@@ -94,26 +75,49 @@
 
     </RadioGroup>
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/Barchart"
-        android:layout_width="341dp"
-        android:layout_height="439dp"
+    <ImageButton
+        android:id="@+id/imageButtonReturn8"
+        android:layout_width="46dp"
+        android:layout_height="41dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#0b7990"
+        android:scaleType="fitCenter"
+        android:src="@drawable/left_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.017" />
+
+    <Button
+        android:id="@+id/buttonAfficher2"
+        android:layout_width="285dp"
+        android:layout_height="61dp"
+        android:backgroundTint="#FFFF"
+        android:text="@string/afficher_pie"
+        android:textColor="#0b7990"
+        android:theme="@style/AppTheme.Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
+        app:layout_constraintVertical_bias="0.249"
+        tools:ignore="MissingConstraints" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="337dp"
-        android:layout_height="18dp"
-        android:progressTint="@color/white"
+    <TextView
+        android:id="@+id/textViewchoix3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/r_partition_des_containers"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
-
+        app:layout_constraintVertical_bias="0.022" />
 </android.support.constraint.ConstraintLayout>

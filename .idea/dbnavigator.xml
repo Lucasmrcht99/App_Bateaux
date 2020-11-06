@@ -45,9 +45,7 @@
     <connection id="b84c4293-94cd-44ac-8892-0db4286c90f0" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="b84c4293-94cd-44ac-8892-0db4286c90f0" dataset="main.mouvements" active-filter-id="59e52461-10a1-4957-99db-1952e936f120">
-      <filter id="59e52461-10a1-4957-99db-1952e936f120" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
-    </filter-actions>
+    <filter-actions connection-id="b84c4293-94cd-44ac-8892-0db4286c90f0" dataset="main.mouvements" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
