@@ -23,6 +23,7 @@ import req_rep_IOBREP.RequeteIOBREP;
 public class MenuActivity extends Activity {
 
     private String user="";
+    private String fonction="";
     ObjectInputStream ois=null;
     ObjectOutputStream oos=null;
     private Socket cliSock;
@@ -56,13 +57,16 @@ public class MenuActivity extends Activity {
         // finally change the color
         window.setStatusBarColor(getColor(R.color.blue_app));
         user = (String)this.getIntent().getExtras().get("User");
+        fonction = (String)this.getIntent().getExtras().get("Fonction");
         boat = new Bateau();
         idBoat = (TextView) findViewById(R.id.textViewBateau);
 
         cliSock = SocketHandler.getSock();
         context=this;
-        TextView textView = (TextView)findViewById(R.id.textViewUser);
-        textView.setText(user);
+        TextView userText = (TextView)findViewById(R.id.textViewUser);
+        TextView userFonc = (TextView)findViewById(R.id.textViewFonction);
+        userText.setText(user);
+        userFonc.setText(fonction);
         MenuActivity menuAct = this;
 
         Button bBoat = (Button)this.findViewById(R.id.buttonBoat);
@@ -122,6 +126,9 @@ public class MenuActivity extends Activity {
             }
         });
 
+        graph.setEnabled(false);
+        graph.setVisibility(View.INVISIBLE);
+
         Button unLoadCont = (Button)this.findViewById(R.id.buttonUnloadContainers);
         unLoadCont.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +151,12 @@ public class MenuActivity extends Activity {
                 }
             }
         });
+
+        if(fonction.equals("Chef-service") || fonction.equals("Contremaitre"))
+        {
+            graph.setEnabled(true);
+            graph.setVisibility(View.VISIBLE);
+        }
 
 
     }

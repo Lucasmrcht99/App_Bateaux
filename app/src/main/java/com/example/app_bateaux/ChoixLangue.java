@@ -23,6 +23,7 @@ public class ChoixLangue extends Activity {
     private ImageView de;
     private Context context = this;
     private String user;
+    private String fonction;
     ObjectOutputStream oos=null;
     private Socket cliSock;
     private boolean stop = true;
@@ -43,6 +44,7 @@ public class ChoixLangue extends Activity {
 
 
         user = (String)this.getIntent().getExtras().get("User");
+        fonction = (String)this.getIntent().getExtras().get("Fonction");
         fr = (ImageView) findViewById(R.id.imageViewFr);
         en = (ImageView) findViewById(R.id.imageViewEn);
         de = (ImageView) findViewById(R.id.imageViewDe);
@@ -54,6 +56,7 @@ public class ChoixLangue extends Activity {
 
                 Intent intent = new Intent(context, MenuActivity.class);
                 intent.putExtra("User", user);
+                intent.putExtra("Fonction", fonction);
                 intent.putExtra("Langue", "fr");
 
                 startActivity(intent);
@@ -68,6 +71,7 @@ public class ChoixLangue extends Activity {
 
                 Intent intent = new Intent(context, MenuActivity.class);
                 intent.putExtra("User", user);
+                intent.putExtra("Fonction", fonction);
                 intent.putExtra("Langue", "en");
 
                 startActivity(intent);
@@ -82,6 +86,7 @@ public class ChoixLangue extends Activity {
 
                 Intent intent = new Intent(context, MenuActivity.class);
                 intent.putExtra("User", user);
+                intent.putExtra("Fonction", fonction);
                 intent.putExtra("Langue", "de");
                 startActivity(intent);
                 stop=false;

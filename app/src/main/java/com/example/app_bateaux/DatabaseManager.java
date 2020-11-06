@@ -148,21 +148,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return dates;
     }
 
-    public  ArrayList<String> recupDatespie(boolean mode,String date)
+    public  ArrayList<String> recupDatespie(boolean mode,String date,String date2)
     {
         ArrayList<String> dest = new ArrayList<>();
         boolean find = false;
-        StringTokenizer st = new StringTokenizer(date,"/");
-        String annee = st.nextToken();
-        String mois = st.nextToken();
-        int jour = Integer.parseInt(st.nextToken())+6;
-        String chaine = annee+"/"+mois+"/"+jour;
 
 
 
         if(mode == false)
         {
-            String req = "Select destination from mouvements where date_arriv is not null AND date_arriv>='"+date+"' AND date_arriv<='"+chaine+"'  order by destination ";
+            String req = "Select destination from mouvements where date_arriv is not null AND date_arriv>='"+date+"' AND date_arriv<='"+date2+"'  order by destination ";
             Cursor cursor = this.getReadableDatabase().rawQuery(req,null);
             cursor.moveToFirst();
 
@@ -175,7 +170,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         else
         {
-            String req = "Select destination from mouvements where date_depart is not null AND date_depart>='"+date+"' AND date_depart<='"+chaine+"' order by destination ";
+            String req = "Select destination from mouvements where date_depart is not null AND date_depart>='"+date+"' AND date_depart<='"+date2+"' order by destination ";
             Cursor cursor = this.getReadableDatabase().rawQuery(req,null);
             cursor.moveToFirst();
 

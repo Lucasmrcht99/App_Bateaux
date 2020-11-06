@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.StringTokenizer;
 
 import req_rep_multithread.*;
 import req_rep_IOBREP.*;
@@ -94,7 +95,11 @@ public class DoLogin extends AsyncTask<Void, Void, Void> {
             if(rep.getCode() == ReponseIOBREP.OK)
             {
                 logAct.suite = new Intent(logAct, ChoixLangue.class);
-                logAct.suite.putExtra("User", rep.getChargeUtile());
+                StringTokenizer st = new StringTokenizer(rep.getChargeUtile(),"&");
+                String user = st.nextToken();
+                String fonction = st.nextToken();
+                logAct.suite.putExtra("User", user);
+                logAct.suite.putExtra("Fonction", fonction);
                 SocketHandler.setSock(cliSock);
                 logAct.startActivity(logAct.suite);
             }

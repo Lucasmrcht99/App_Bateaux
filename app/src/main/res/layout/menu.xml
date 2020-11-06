@@ -8,6 +8,22 @@
     android:orientation="vertical"
     tools:context=".MenuActivity">
 
+    <TextView
+        android:id="@+id/textViewFonction"
+        android:layout_width="139dp"
+        android:layout_height="26dp"
+        android:gravity="top|left"
+        android:text="fonction"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
+
     <Button
         android:id="@+id/buttonGraphique"
         android:layout_width="272dp"
@@ -158,7 +174,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/docker"
+        android:text="Agent : "
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
