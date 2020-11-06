@@ -1,6 +1,7 @@
 package com.example.app_bateaux;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class AddSocieteActivity extends Activity {
     ObjectOutputStream oos=null;
     private boolean stop = true;
     private Socket cliSock;
+    private Context context = this;
 
 
     @Override
@@ -61,20 +63,27 @@ public class AddSocieteActivity extends Activity {
                 String Tel = tel.getText().toString();
                 String Adresse = adresse.getText().toString();
 
-                DoAddSociete doAddSociete = new DoAddSociete(addSocAct, Id, Nom, Mail, Tel, Adresse);
-                int code = doAddSociete.doInBackground();
-
-                if(code == ReponseIOBREP.OK)
+                if(Id.equals("") || Nom.equals("") || Mail.equals("") || Tel.equals("") || Adresse.equals(""))
                 {
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("societe", Id);
-                    setResult(1,returnIntent);
-                    stop=false;
-                    finish();
+                    AfficheToast.Affiche("Champ vide !",context);
                 }
-                if(code == ReponseIOBREP.FAIL)
+                else
                 {
-                    AfficheToast.Affiche("Société existante !", addSocAct);
+                    DoAddSociete doAddSociete = new DoAddSociete(addSocAct, Id, Nom, Mail, Tel, Adresse);
+                    int code = doAddSociete.doInBackground();
+
+                    if(code == ReponseIOBREP.OK)
+                    {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("societe", Id);
+                        setResult(1,returnIntent);
+                        stop=false;
+                        finish();
+                    }
+                    if(code == ReponseIOBREP.FAIL)
+                    {
+                        AfficheToast.Affiche("Société existante !", addSocAct);
+                    }
                 }
             }
         });

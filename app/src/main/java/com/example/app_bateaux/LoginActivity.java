@@ -1,6 +1,7 @@
 package com.example.app_bateaux;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class LoginActivity extends Activity {
     private String pwd="";
     public Intent suite;
     private Button bLogin;
+    private Context  context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,10 @@ public class LoginActivity extends Activity {
                 {
                     DoLogin doLog = new DoLogin(login, pwd, logAct);
                     doLog.doInBackground();
+                }
+                else
+                {
+                    AfficheToast.Affiche("Champ vide",context);
                 }
             }
         });

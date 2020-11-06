@@ -34,8 +34,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import req_rep_IOBREP.RequeteIOBREP;
@@ -183,111 +186,130 @@ public class AffPie extends Activity {
 
                 if (fini.getText().toString().equals("") || debut.getText().toString().equals("")) {
                     AfficheToast.Affiche("Choisissez vos dates !", context);
-                } else {
-                    dest = new ArrayList<String>();
-                    listtop = new ArrayList<String>();
-                    pie.getDescription().setEnabled(false);
-                    pie.setExtraOffsets(5, 10, 5, 5);
-                    pie.setDragDecelerationFrictionCoef(0.95f);
-                    if (r1.isChecked()) {
-                        mode = false;
-                    } else {
-                        mode = true;
+                }
+                else
+                {
+                    Date verif1= new Date();
+                    Date verif2= new Date();
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                         verif1 = sdf.parse(debut.getText().toString());
+                         verif2 = sdf.parse(fini.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    pie.setExtraOffsets(20.f, 0.f, 20.f, 0.f);
 
-                    pie.setDrawHoleEnabled(true);
-                    pie.setHoleColor(getColor(R.color.blue_app));
+                    if(verif1.after(verif2)){
+                        AfficheToast.Affiche("La date de fin doit être après la date de début", context);
+                    }
+                    else
+                    {
 
-                    pie.setTransparentCircleColor(getColor(R.color.blue_app));
-                    pie.setTransparentCircleAlpha(110);
-
-                    pie.setCenterText(debut.getText().toString() + " -> " + fini.getText().toString());
-                    pie.setCenterTextColor(Color.WHITE);
-
-                    pie.setHoleRadius(58f);
-                    pie.setTransparentCircleRadius(61f);
-
-                    pie.setDrawCenterText(true);
-
-                    pie.setRotationAngle(0);
-                    pie.setRotationEnabled(true);
-                    pie.setHighlightPerTapEnabled(true);
-
-                    Legend l = pie.getLegend();
-                    l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-                    l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-                    l.setOrientation(Legend.LegendOrientation.VERTICAL);
-                    l.setTextColor(Color.WHITE);
-                    l.setTextSize(10f);
-                    l.setDrawInside(false);
-                    l.setXEntrySpace(7f);
-                    l.setYEntrySpace(0f);
-                    l.setYOffset(0f);
-
-
-                    pie.animateY(1400, EaseInOutQuad);
-                    db = new DatabaseManager(context);
-                    dest = db.recupDatespie(mode, debut.getText().toString(), fini.getText().toString());
-                    db.close();
-                    int taille;
-
-                    if (!dest.get(0).equals(" ")) {
-                        taille = dest.size();
-                        containers = new ArrayList<>();
-                        int compteur;
-
-
-                        for (int i = 0, j = 1; i < taille; j++) {
-                            compteur = 1;
-                            String dateverif = dest.get(i).toString();
-                            listtop.add(dateverif);
-
-                            i++;
-                            while (i < taille && (dest.get(i).equalsIgnoreCase(dateverif))) {
-                                compteur++;
-                                i++;
-                            }
-                            containers.add(new PieEntry(compteur, dateverif));
+                        dest = new ArrayList<String>();
+                        listtop = new ArrayList<String>();
+                        pie.getDescription().setEnabled(false);
+                        pie.setExtraOffsets(5, 10, 5, 5);
+                        pie.setDragDecelerationFrictionCoef(0.95f);
+                        if (r1.isChecked()) {
+                            mode = false;
+                        } else {
+                            mode = true;
                         }
-                        PieDataSet dataSet;
+                        pie.setExtraOffsets(20.f, 0.f, 20.f, 0.f);
 
-                        dataSet = new PieDataSet(containers, "List destination");
+                        pie.setDrawHoleEnabled(true);
+                        pie.setHoleColor(getColor(R.color.blue_app));
 
-                        ArrayList<Integer> colors = new ArrayList<>();
-                        colors.add(Color.parseColor("#2ecc71"));
-                        colors.add(Color.parseColor("#f1c40f"));
-                        colors.add(Color.parseColor("#e74c3c"));
-                        colors.add(Color.parseColor("#3498db"));
-                        colors.add(Color.parseColor("#15B8A2"));
-                        colors.add(Color.parseColor("#D56587"));
-                        colors.add(Color.parseColor("#267213"));
-                        colors.add(Color.parseColor("#748D21"));
-                        colors.add(Color.parseColor("#CA801F"));
-                        colors.add(Color.parseColor("#D00B4C"));
-                        colors.add(Color.parseColor("#C90BD0"));
-                        colors.add(Color.parseColor("#FE6F00"));
+                        pie.setTransparentCircleColor(getColor(R.color.blue_app));
+                        pie.setTransparentCircleAlpha(110);
+
+                        pie.setCenterText(debut.getText().toString() + " -> " + fini.getText().toString());
+                        pie.setCenterTextColor(Color.WHITE);
+
+                        pie.setHoleRadius(58f);
+                        pie.setTransparentCircleRadius(61f);
+
+                        pie.setDrawCenterText(true);
+
+                        pie.setRotationAngle(0);
+                        pie.setRotationEnabled(true);
+                        pie.setHighlightPerTapEnabled(true);
+
+                        Legend l = pie.getLegend();
+                        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+                        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+                        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+                        l.setTextColor(Color.WHITE);
+                        l.setTextSize(10f);
+                        l.setDrawInside(false);
+                        l.setXEntrySpace(7f);
+                        l.setYEntrySpace(0f);
+                        l.setYOffset(0f);
 
 
-                        dataSet.setSliceSpace(3f);
-                        dataSet.setSelectionShift(5f);
-                        dataSet.setColors(colors);
-                        dataSet.setValueLinePart1OffsetPercentage(80.f);
-                        dataSet.setValueLinePart1Length(0.2f);
-                        dataSet.setValueLinePart2Length(0.4f);
+                        pie.animateY(1400, EaseInOutQuad);
+                        db = new DatabaseManager(context);
+                        dest = db.recupDatespie(mode, debut.getText().toString(), fini.getText().toString());
+                        db.close();
+                        int taille;
 
-                        PieData data = new PieData(dataSet);
-                        data.setValueFormatter(new PercentFormatter());
-                        data.setValueTextSize(11f);
-                        data.setValueTextColor(Color.WHITE);
-                        pie.setData(data);
+                        if (!dest.get(0).equals(" ")) {
+                            taille = dest.size();
+                            containers = new ArrayList<>();
+                            int compteur;
 
-                        pie.setVisibility(View.VISIBLE);
-                    } else {
-                        AfficheToast.Affiche("Aucun containers", context);
-                        pie.setVisibility(View.INVISIBLE);
+
+                            for (int i = 0, j = 1; i < taille; j++) {
+                                compteur = 1;
+                                String dateverif = dest.get(i).toString();
+                                listtop.add(dateverif);
+
+                                i++;
+                                while (i < taille && (dest.get(i).equalsIgnoreCase(dateverif))) {
+                                    compteur++;
+                                    i++;
+                                }
+                                containers.add(new PieEntry(compteur, dateverif));
+                            }
+                            PieDataSet dataSet;
+
+                            dataSet = new PieDataSet(containers, "List destination");
+
+                            ArrayList<Integer> colors = new ArrayList<>();
+                            colors.add(Color.parseColor("#2ecc71"));
+                            colors.add(Color.parseColor("#f1c40f"));
+                            colors.add(Color.parseColor("#e74c3c"));
+                            colors.add(Color.parseColor("#3498db"));
+                            colors.add(Color.parseColor("#15B8A2"));
+                            colors.add(Color.parseColor("#D56587"));
+                            colors.add(Color.parseColor("#267213"));
+                            colors.add(Color.parseColor("#748D21"));
+                            colors.add(Color.parseColor("#CA801F"));
+                            colors.add(Color.parseColor("#D00B4C"));
+                            colors.add(Color.parseColor("#C90BD0"));
+                            colors.add(Color.parseColor("#FE6F00"));
+
+
+                            dataSet.setSliceSpace(3f);
+                            dataSet.setSelectionShift(5f);
+                            dataSet.setColors(colors);
+                            dataSet.setValueLinePart1OffsetPercentage(80.f);
+                            dataSet.setValueLinePart1Length(0.2f);
+                            dataSet.setValueLinePart2Length(0.4f);
+
+                            PieData data = new PieData(dataSet);
+                            data.setValueFormatter(new PercentFormatter());
+                            data.setValueTextSize(11f);
+                            data.setValueTextColor(Color.WHITE);
+                            pie.setData(data);
+
+                            pie.setVisibility(View.VISIBLE);
+                        } else {
+                            AfficheToast.Affiche("Aucun containers", context);
+                            pie.setVisibility(View.INVISIBLE);
+                        }
+
                     }
-
                 }
             }
         });

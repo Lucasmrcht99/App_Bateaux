@@ -1,6 +1,7 @@
 package com.example.app_bateaux;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class BoatActivity extends Activity {
     ObjectOutputStream oos=null;
     private Socket cliSock;
     private boolean stop = true;
+    private Context context = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,23 +90,28 @@ public class BoatActivity extends Activity {
                     Vide = "vide";
                 }
 
-                DoAddBoat doAddBoat = new DoAddBoat(boatActivity, Id, Societe, Capacite);
-                int code = doAddBoat.doInBackground();
-
-                if(code == ReponseIOBREP.OK || code == ReponseIOBREP.FAIL)
+                if(Id.equals("") || Societe.equals("") || Capacite.equals(""))
                 {
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("boatId", Id);
-                    returnIntent.putExtra("capacite", Capacite);
-                    returnIntent.putExtra("destination", Dest);
-                    returnIntent.putExtra("vide", Vide);
-                    setResult(1,returnIntent);
-                    stop=false;
-                    finish();
+                    AfficheToast.Affiche("Champ vide !",context);
                 }
-                if(code == ReponseIOBREP.FAIL2)
-                {
-                    AfficheToast.Affiche("Société inexistante !", boatActivity);
+                else {
+
+                    DoAddBoat doAddBoat = new DoAddBoat(boatActivity, Id, Societe, Capacite);
+                    int code = doAddBoat.doInBackground();
+
+                    if (code == ReponseIOBREP.OK || code == ReponseIOBREP.FAIL) {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("boatId", Id);
+                        returnIntent.putExtra("capacite", Capacite);
+                        returnIntent.putExtra("destination", Dest);
+                        returnIntent.putExtra("vide", Vide);
+                        setResult(1, returnIntent);
+                        stop = false;
+                        finish();
+                    }
+                    if (code == ReponseIOBREP.FAIL2) {
+                        AfficheToast.Affiche("Société inexistante !", boatActivity);
+                    }
                 }
             }
         });
