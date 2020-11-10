@@ -148,7 +148,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return dates;
     }
 
-    public  ArrayList<String> recupDatespie(boolean mode,String date,String date2)
+    public  ArrayList<String> recupDestpie(boolean mode, String date, String date2)
     {
         ArrayList<String> dest = new ArrayList<>();
         boolean find = false;

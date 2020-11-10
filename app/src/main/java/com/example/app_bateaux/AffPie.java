@@ -10,36 +10,28 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.animation.EasingFunction;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import req_rep_IOBREP.RequeteIOBREP;
 
@@ -249,7 +241,7 @@ public class AffPie extends Activity {
 
                         pie.animateY(1400, EaseInOutQuad);
                         db = new DatabaseManager(context);
-                        dest = db.recupDatespie(mode, debut.getText().toString(), fini.getText().toString());
+                        dest = db.recupDestpie(mode, debut.getText().toString(), fini.getText().toString());
                         db.close();
                         int taille;
 
@@ -261,15 +253,15 @@ public class AffPie extends Activity {
 
                             for (int i = 0, j = 1; i < taille; j++) {
                                 compteur = 1;
-                                String dateverif = dest.get(i).toString();
-                                listtop.add(dateverif);
+                                String destVerif = dest.get(i).toString();
+                                listtop.add(destVerif);
 
                                 i++;
-                                while (i < taille && (dest.get(i).equalsIgnoreCase(dateverif))) {
+                                while (i < taille && (dest.get(i).equalsIgnoreCase(destVerif))) {
                                     compteur++;
                                     i++;
                                 }
-                                containers.add(new PieEntry(compteur, dateverif));
+                                containers.add(new PieEntry(compteur, destVerif));
                             }
                             PieDataSet dataSet;
 
@@ -314,12 +306,6 @@ public class AffPie extends Activity {
             }
         });
 
-    }
-    private class MyAxisValueFormattery implements IAxisValueFormatter {
-        @Override
-        public String getFormattedValue(float value, AxisBase axis) {
-            return listtop.get((int) value - 1);
-        }
     }
 
     @Override
